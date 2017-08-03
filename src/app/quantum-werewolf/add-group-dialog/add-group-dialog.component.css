@@ -1,0 +1,26 @@
+.actionButtons {
+  justify-content: center;
+}
+
+ .removePlayerIcon {
+  color: red;
+}
+/* .removePlayerIcon:hover {
+  cursor: pointer;
+} */
+
+.movePlayerIcon {
+
+}
+
+
+.players {
+  vertical-align: middle;
+}
+
+.playersName {
+
+}
+.playersName:hover {
+  cursor: pointer;
+}
