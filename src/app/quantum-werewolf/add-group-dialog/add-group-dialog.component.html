@@ -1,4 +1,3 @@
-
 <div  class="bodyWithPadding" >
 
   <h1 md-dialog-title>部屋を作成</h1>
@@ -42,10 +41,9 @@
           </button>
         </md-list-item>
 
-        <md-list-item class="players">
+         <md-list-item class="players">
           <md-input-container>
             <input mdInput
-              #newPlayerName
               [(ngModel)]="newPlayerName"
               placeholder="player's name"
               [required]="newPlayerName =='' ">
@@ -53,10 +51,11 @@
               <md-icon>clear</md-icon>
             </button>
           </md-input-container>
-          <button md-mini-fab color="primary" (click)="addPlayer(); newPlayerName">
+          <button md-mini-fab color="primary" (click)="addPlayer()">
             <md-icon>add</md-icon>
           </button>
         </md-list-item>
+
       </md-list>
     </div>
 
