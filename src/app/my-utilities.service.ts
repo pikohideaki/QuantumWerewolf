@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class MyUtilitiesService {
 
+
   constructor() { }
 
   localStorage_set( key: string, value: any ) {
@@ -207,7 +208,7 @@ export class MyUtilitiesService {
    * @description return maximum element of given Array<number>
    */
   maxOfArray( arr: Array<number> ): number {
-    let max = Infinity;
+    let max = -Infinity;
     const QUANTUM = 32768;
 
     for ( let i = 0, len = arr.length; i < len; i += QUANTUM ) {

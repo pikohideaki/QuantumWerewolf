@@ -47,12 +47,16 @@ import { SignUpComponent    } from './user-admin/sign-up/sign-up.component';
 
 import { GameGroupsService } from './quantum-werewolf/game-groups.service';
 
-import { GroupListComponent } from './quantum-werewolf/group-list/group-list.component';
+import { GroupListComponent } from './quantum-werewolf/game-rooms/group-list/group-list.component';
 import { GameMainComponent } from './quantum-werewolf/game-main/game-main.component';
-import { AddGroupDialogComponent } from './quantum-werewolf/add-group-dialog/add-group-dialog.component';
 import { ProbabilityTableComponent } from './quantum-werewolf/game-main/probability-table/probability-table.component';
 import { GameRulesComponent } from './quantum-werewolf/game-main/game-rules/game-rules.component';
 
+import { DragulaModule } from 'ng2-dragula';
+
+import { GameRoomsComponent } from './quantum-werewolf/game-rooms/game-rooms.component';
+import { AddGameGroupComponent } from './quantum-werewolf/game-rooms/add-game-group/add-game-group.component';
+import { SignInGroupDialogComponent } from './quantum-werewolf/game-rooms/sign-in-group-dialog/sign-in-group-dialog.component';
 
 
 
@@ -74,9 +78,11 @@ import { GameRulesComponent } from './quantum-werewolf/game-main/game-rules/game
     SignUpComponent,
     GroupListComponent,
     GameMainComponent,
-    AddGroupDialogComponent,
     ProbabilityTableComponent,
     GameRulesComponent,
+    GameRoomsComponent,
+    AddGameGroupComponent,
+    SignInGroupDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,7 +93,7 @@ import { GameRulesComponent } from './quantum-werewolf/game-main/game-rules/game
     RouterModule.forRoot( [
       { path: ''                               , component: HomeComponent      },
       { path: 'user_admin'                     , component: UserAdminComponent },
-      { path: 'quantum-werewolf'               , component: GroupListComponent },
+      { path: 'quantum-werewolf'               , component: GameRoomsComponent },
       { path: 'quantum-werewolf-game-main/:id' , component: GameMainComponent  },
     ], { useHash: true } ),
     MaterialModule,
@@ -96,6 +102,7 @@ import { GameRulesComponent } from './quantum-werewolf/game-main/game-rules/game
     AngularFireModule.initializeApp(environment.firebase, 'QuantumWerewolfApp'), // imports firebase/app needed for everything
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    DragulaModule,
   ],
   providers: [
     MyUtilitiesService,
@@ -105,7 +112,7 @@ import { GameRulesComponent } from './quantum-werewolf/game-main/game-rules/game
   entryComponents: [
       AlertDialogComponent,
       ConfirmDialogComponent,
-      AddGroupDialogComponent,
+      SignInGroupDialogComponent,
   ],
   bootstrap: [AppComponent]
 })

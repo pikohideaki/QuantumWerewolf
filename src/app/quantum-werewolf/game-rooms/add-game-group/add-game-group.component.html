@@ -1,0 +1,113 @@
+<div  class="bodyWithPadding" >
+
+  <h3>部屋を作成</h3>
+
+  <div class="nameAndPassword marginedElement">
+    <md-input-container>
+      <input mdInput
+        [(ngModel)]="newGroup.name"
+        placeholder="new group name"
+        [required]="newGroup.name == '' ">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput
+        [(ngModel)]="newGroup.password"
+        placeholder="password"
+        [required]="newGroup.password =='' ">
+    </md-input-container>
+  </div>
+
+  <div class="addPlayers marginedElement">
+    <h4>プレイヤー</h4>
+
+    <md-input-container>
+      <input mdInput placeholder="player's name" [(ngModel)]="newPlayerName">
+      <button mdSuffix md-icon-button (click)="clearNewPlayerName()">
+        <md-icon>clear</md-icon>
+      </button>
+    </md-input-container>
+    <button md-raised-button color="primary" (click)="addPlayer()">
+      プレイヤーを追加
+    </button>
+    <button md-raised-button color="primary" (click)="shufflePlayers()">
+      プレイヤーをランダムに並べ替え
+    </button>
+
+    <table class='my-data-table  my-data-table--shadow3px' *ngIf="newGroup.members.length > 0">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th>プレイヤー名</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let playerName of newGroup.members; let idx = index">
+          <td>
+            <button *ngIf="idx !== 0" md-icon-button (click)="movePlayerUpward( idx )">
+              <md-icon md-icon-button class="movePlayerIcon">
+                arrow_upward
+              </md-icon>
+            </button>
+          </td>
+          <td>
+            <button *ngIf="idx !== newGroup.members.length - 1" md-icon-button (click)="movePlayerDownward( idx )">
+              <md-icon md-icon-button class="movePlayerIcon">
+                arrow_downward
+              </md-icon>
+            </button>
+          </td>
+          <td> {{playerName}} </td>
+          <td>
+            <button md-icon-button class="removePlayerIcon" (click)="removePlayer(idx)">
+              <md-icon>clear</md-icon>
+              <!-- <md-icon>remove_circle_outline</md-icon> -->
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="marginedElement">
+    <h4>その他の設定</h4>
+    <div>
+      <md-slide-toggle color="primary" [(ngModel)]="newGroup.voteOfOtherPlayersVisible" >
+        <span [mdTooltip]="description1" mdTooltipPosition="after">
+          投票数を隠す
+        </span>
+      </md-slide-toggle>
+    </div>
+    <div>
+      <md-slide-toggle color="primary" [(ngModel)]="newGroup.splitSeerAndVillagers" >
+        <span [mdTooltip]="description2" mdTooltipPosition="after">
+          確率表の人間を占い師と村人に分ける
+        </span>
+      </md-slide-toggle>
+    </div>
+    <div>
+      <span [mdTooltip]="description3" mdTooltipPosition="after">
+        人狼の人数
+      </span>
+      <button md-raised-button class="miniButton"
+          [disabled]="newGroup.numberOfWerewolves <= 1"
+          (click)="decrement()">
+        <md-icon>exposure_neg_1</md-icon>
+      </button>
+      <span>{{newGroup.numberOfWerewolves}}</span>
+      <button md-raised-button class="miniButton"
+          (click)="increment()">
+        <md-icon>exposure_plus_1</md-icon>
+      </button>
+    </div>
+  </div>
+
+  <span class="marginedElement">
+    <button md-raised-button color='primary'
+      [disabled]="!newGameFormIsValid()"
+      (click)="newGame()">
+      OK
+    </button>
+  </span>
+</div>

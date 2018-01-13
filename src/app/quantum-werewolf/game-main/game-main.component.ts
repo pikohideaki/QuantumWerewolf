@@ -17,7 +17,9 @@ import { GameGroupsService } from '../game-groups.service';
 export class GameMainComponent implements OnInit, OnDestroy {
   private alive: boolean = true;
 
-  gameGroupsList: GameGroup[] = [];
+  groupID$: Observable<string>;
+  gameGroup$: Observable<GameGroup>;
+  gameGroup: GameGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,16 +27,20 @@ export class GameMainComponent implements OnInit, OnDestroy {
     public utils: MyUtilitiesService,
     private gameGroups: GameGroupsService
   ) {
-    this.gameGroups.gameGroups$
-      .map( list => list.reverse() )
-      .takeWhile( () => this.alive )
-      .subscribe( val => this.gameGroupsList = val );
+
   }
 
   ngOnInit() {
-    this.route.paramMap
-        .switchMap( (params: ParamMap) => params.getAll('id') )
-        .subscribe( id => console.log( this.gameGroupsList.find( e => e.id === Number(id) ) ) );
+    this.groupID$ = this.route.paramMap.switchMap( (params: ParamMap) => params.getAll('id') );
+
+    this.gameGroup$
+      = this.gameGroups.gameGroups$.combineLatest(
+          this.groupID$,
+          (list, id) => list.find( e => e.id === Number(id) ) )
+
+    this.gameGroup$
+      .takeWhile( () => this.alive )
+      .subscribe( val => {this.gameGroup = val; console.log(val)} );
   }
 
   ngOnDestroy() {

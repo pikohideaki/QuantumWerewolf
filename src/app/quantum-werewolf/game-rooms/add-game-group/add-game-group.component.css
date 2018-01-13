@@ -1,0 +1,13 @@
+
+.infoIcon,
+.movePlayerIcon,
+.removePlayerIcon {
+  color: gray;
+}
+
+.miniButton {
+  padding: 0;
+  min-width: 0;
+  width: 35px;
+  color: gray;
+}

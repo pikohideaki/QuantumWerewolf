@@ -6,11 +6,12 @@ import { Observable } from 'rxjs/Rx';
 import { NgForm } from '@angular/forms';
 import { MdDialog, MdSnackBar } from '@angular/material';
 
-import { MyUtilitiesService } from '../../my-utilities.service';
+import { MyUtilitiesService } from '../../../my-utilities.service';
 
-import { GameGroup } from '../game-group';
-import { GameGroupsService } from '../game-groups.service';
-import { AddGroupDialogComponent } from '../add-group-dialog/add-group-dialog.component';
+import { GameGroup } from '../../game-group';
+import { GameGroupsService } from '../../game-groups.service';
+import { SignInGroupDialogComponent } from '../sign-in-group-dialog/sign-in-group-dialog.component';
+
 
 @Component({
   // providers: [GameGroupsService],
@@ -46,8 +47,12 @@ export class GroupListComponent implements OnInit, OnDestroy {
     this.alive = false;
   }
 
+  private groupByID( groupID ): GameGroup {
+    return this.gameGroupsList.find( g => g.id === groupID );
+  }
+
   private signInPasswordIsValid( groupID ): boolean {
-    const isValid = ( this.signInPassword === this.gameGroupsList.find( g => g.id === groupID ).password );
+    const isValid = ( this.signInPassword === this.groupByID( groupID ).password );
     this.showWrongPasswordAlert = !isValid;
     return isValid;
   }
@@ -58,15 +63,19 @@ export class GroupListComponent implements OnInit, OnDestroy {
   }
 
   addGameGroup = async () => {
-    const dialogRef = this.dialog.open( AddGroupDialogComponent );
+    const dialogRef = this.dialog.open( SignInGroupDialogComponent );
   };
 
 
   signIn( groupID: number ) {
     if ( !this.signInPasswordIsValid( groupID ) ) return;
-    this.resetSignInForm();
-    this.router.navigate( ['/quantum-werewolf-game-main', groupID] );
-    this.openSnackBar('Successfully signed in!');
+    // this.resetSignInForm();
+    const dialogRef = this.dialog.open( SignInGroupDialogComponent, { data: this.groupByID( groupID ) } );
+    dialogRef.afterClosed().subscribe( result => {
+      if ( result === 'OK Clicked' ) {
+        this.openSnackBar('Successfully signed in!');
+      }
+    });
   }
 
   // signOut = async ( groupID ) => {

@@ -1,20 +1,11 @@
 
 <div class="bodyWithoutHeader bodyWithPadding" (click)="backgroundClicked()">
-
-  <div id="addGameGroupButtonWrapper">
-
-    <!-- <md-input-container>
-      <input mdInput [(ngModel)]="newGroupName" placeholder="new group name" [required]="newGroupName == '' ">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput [(ngModel)]="newGroupPassword" placeholder="password" [required]="newGroupPassword =='' ">
-    </md-input-container> -->
-
+  <!-- <div id="addGameGroupButtonWrapper">
     <button md-raised-button color="primary" (click)="addGameGroup()">
       <md-icon>group_add</md-icon>
     </button>
-  </div>
-<!--
+  </div> -->
+
   <div *ngFor="let group of gameGroupsList; let idx = index">
     <md-card class="groupListItem" (click)="groupClicked($event, idx)">
 
@@ -46,5 +37,5 @@
       </md-card-actions>
 
     </md-card>
-  </div> -->
+  </div>
 </div>

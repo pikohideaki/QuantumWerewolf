@@ -1,0 +1,47 @@
+<div  class="bodyWithPadding" >
+
+   <h1 md-dialog-title>{{newGroup.name}}</h1>
+
+  <div md-dialog-content>
+    <md-list dense>
+      <h4 md-subheader>メンバー</h4>
+      <md-list-item  *ngFor="let playerName of newGroup.members">
+        <md-icon md-list-icon>person</md-icon>
+        {{playerName}}
+      </md-list-item>
+
+      <h4 md-subheader>その他の設定</h4>
+      <md-list-item>
+        <md-icon md-list-icon>settings</md-icon>
+        投票数を隠す：{{ (newGroup.voteOfOtherPlayersVisible ? 'ON' : 'OFF') }}
+      </md-list-item>
+      <md-list-item>
+        <md-icon md-list-icon>settings</md-icon>
+        確率表の人間を占い師と村人に分ける：{{(newGroup.splitSeerAndVillagers ? 'ON' : 'OFF')}}
+      </md-list-item>
+      <md-list-item>
+        <md-icon md-list-icon>settings</md-icon>
+        人狼の人数：{{newGroup.numberOfWerewolves}}
+      </md-list-item>
+    </md-list>
+  </div>
+
+  <div md-dialog-actions class='actionButtons'>
+    <span class="marginedElement">
+      <button md-raised-button
+          md-dialog-close="OK Clicked"
+          color='primary'
+          (click)="newGame()">
+        開始
+      </button>
+    </span>
+    <span class="marginedElement">
+      <button md-raised-button
+          md-dialog-close="Cancel Clicked"
+          class="marginedElement" >
+        Cancel
+      </button>
+    </span>
+  </div>
+
+</div>

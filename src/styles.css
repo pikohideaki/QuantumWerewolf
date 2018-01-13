@@ -4,14 +4,11 @@
 
 * {
   font-family: "Helvetica","Arial",sans-serif;
+  box-sizing: border-box;
 }
 
 a {
   text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 body {
@@ -43,3 +40,11 @@ input[type=number] {
   height: calc(100vh - 64px);  /* subtract header height */
   width: 100vw;
 }
+
+
+/* .miniButton {
+  padding: 0;
+  min-width: 0;
+  width: 35px;
+  color: gray;
+} */
